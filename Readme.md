@@ -6,6 +6,8 @@ A simple php router class
 Examples
 
 ```PHP
+require 'jblond/autoloader.class.php';
+new autoloader();
 $router = new \jblond\router\router();
 $router->registry->set('basepath', '');
 $router->init();
