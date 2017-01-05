@@ -7,7 +7,7 @@ Examples
 
 ```PHP
 require 'jblond/autoloader.class.php';
-new autoloader();
+new \jblond\autoloader();
 $router = new \jblond\router\router();
 $router->registry->set('basepath', '');
 $router->init();
@@ -46,4 +46,18 @@ $router->add404(function ($url) {
     echo '404 :-( ' . $url;
 });
 $router->run();
+```
+
+Apache config
+
+```
+		RewriteEngine on
+		RewriteBase /
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteCond %{REQUEST_FILENAME} !-d
+		RewriteRule ^(.*)$ index.php [QSA]
+
+		Options Indexes FollowSymLinks
+		AllowOverride All
+		Require all granted
 ```
