@@ -1,6 +1,8 @@
 PHP router
 ======================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a89005f98a484c2db2baa832c5bd573b)](https://www.codacy.com/app/leet31337/php-router?utm_source=github.com&utm_medium=referral&utm_content=JBlond/php-router&utm_campaign=badger)
+
 A simple php router class
 
 Examples
