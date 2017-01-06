@@ -48,7 +48,7 @@ $router->add404(function ($url) {
 $router->run();
 ```
 
-Apache config
+Apache rewrite config
 
 ```
 		RewriteEngine on
@@ -56,8 +56,4 @@ Apache config
 		RewriteCond %{REQUEST_FILENAME} !-f
 		RewriteCond %{REQUEST_FILENAME} !-d
 		RewriteRule ^(.*)$ index.php [QSA]
-
-		Options Indexes FollowSymLinks
-		AllowOverride All
-		Require all granted
 ```
