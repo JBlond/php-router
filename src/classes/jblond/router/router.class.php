@@ -100,7 +100,6 @@ class router {
 
 			//check match
 			if(preg_match('#'.$route['expression'].'#',$this->path,$matches)){
-				//echo $expression;
 				array_shift($matches); //Always remove first element. This contains the whole string
 
 				if($this->registry->get('basepath')){

@@ -33,7 +33,7 @@ $router->add('/post/', function () {
 });
 
 $router->add('/post/reciver/', function () {
-	print_r($_POST);
+	// can print_r POST vars
 }, 'POST');
 
 $router->add404(function ($url) {
