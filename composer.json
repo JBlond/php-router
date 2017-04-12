@@ -1,12 +1,16 @@
 {
-  "name": "jblond/php-router",
-  "description": "router script for PHP built in web server with directory listing ",
-  "minimum-stability": "dev",
-  "license": "WTFPL",
-  "authors": [
-    {
-      "name": "Jblond",
-      "email": "leet31337@web.de"
-    }
-  ]
+    "name": "jblond/php-router",
+    "description": "A simple php router class",
+    "type": "library",
+    "require": {
+        "php": "5.4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JBlond",
+            "email": "leet31337@web.de"
+        }
+    ],
+    "minimum-stability": "dev-master"
 }
