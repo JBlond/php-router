@@ -8,21 +8,25 @@ namespace jblond\router;
 class router {
 
 	/**
+	 * array of routes
 	 * @var array
 	 */
 	public $routes = array();
 
 	/**
+	 * array of 404's
 	 * @var array
 	 */
 	public $routes404 = array();
 
 	/**
+	 * path
 	 * @var string
 	 */
 	public $path;
 
 	/**
+	 * registry object
 	 * @var registry
 	 */
 	public $registry;
@@ -49,6 +53,7 @@ class router {
 	}
 
 	/**
+	 * add route
 	 * @param string $expression
 	 * @param mixed $function
 	 * @param string|array $method default is GET
@@ -62,12 +67,32 @@ class router {
 	}
 
 	/**
+	 * add 404
 	 * @param mixed $function
 	 */
 	public function add404($function){
 		array_push($this->routes404, $function);
 	}
 
+	/**
+	 * check if the method is allowed
+	 * @param array $route
+	 * @return bool
+	 */
+	private function is_method_in_routes($route){
+		if(is_array($route['method'])){
+			if(! in_array($_SERVER['REQUEST_METHOD'], (array) $route['method'])){
+				return true;
+			}
+		}
+		else
+		{
+			if($_SERVER['REQUEST_METHOD'] !== $route['method']){
+				return true;
+			}
+		}
+		return false;
+	}
 	/**
 	 * run
 	 */
@@ -76,16 +101,8 @@ class router {
 
 		foreach($this->routes as $route){
 
-			if(is_array($route['method'])){
-				if(! in_array($_SERVER['REQUEST_METHOD'], (array) $route['method'])){
-					continue;
-				}
-			}
-			else
-			{
-				if($_SERVER['REQUEST_METHOD'] !== $route['method']){
-					continue;
-				}
+			if($this->is_method_in_routes($route)){
+				continue;
 			}
 
 			if($this->registry->get('basepath')){
