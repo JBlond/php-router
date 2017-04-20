@@ -2,9 +2,6 @@
     "name": "jblond/php-router",
     "description": "A simple php router class",
     "type": "library",
-    "require": {
-        "php": "5.4.0"
-    },
     "license": "MIT",
     "authors": [
         {
