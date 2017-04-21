@@ -20,6 +20,12 @@ class router {
 	public $routes404 = array();
 
 	/**
+	 * route is found
+	 * @var bool
+	 */
+	private $route_found;
+
+	/**
 	 * path
 	 * @var string
 	 */
@@ -90,11 +96,23 @@ class router {
 		}
 		return false;
 	}
+
+	/**
+	 * run all 404 routes
+	 */
+	private function run_404(){
+		if(!$this->route_found){
+			foreach($this->routes404 as $route404){
+				call_user_func_array($route404, array($this->path));
+			}
+		}
+	}
+
 	/**
 	 * run
 	 */
 	public function run(){
-		$route_found = false;
+		$this->route_found = false;
 
 		foreach($this->routes as $route){
 
@@ -122,14 +140,9 @@ class router {
 				}
 
 				call_user_func_array($route['function'], $matches);
-				$route_found = true;
+				$this->route_found = true;
 			}
 		}
-
-		if(!$route_found){
-			foreach($this->routes404 as $route404){
-				call_user_func_array($route404, array($this->path));
-			}
-		}
+		$this->run_404();
 	}
 }
