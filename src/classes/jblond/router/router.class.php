@@ -154,7 +154,7 @@ class router {
 			}
 
 			if($this->registry->get('basepath')){
-				$route['expression'] = '('.$this->registry->get('basepath').')/'.$route['expression'];
+				$route['expression'] = '(' .$this->registry->get('basepath') . ')/' . $route['expression'];
 			}
 
 			//try to find lambda patterns
@@ -164,10 +164,10 @@ class router {
 			$route['expression'] = '^'.$route['expression'];
 
 			//Add 'find string end' automatically
-			$route['expression'] = $route['expression'].'$';
+			$route['expression'] = $route['expression'] . '$';
 
 			//check match
-			if(preg_match('#'.$route['expression'].'#',$this->path,$matches)){
+			if(preg_match('#' . $route['expression'].'#', $this->path, $matches)){
 				array_shift($matches); //Always remove first element. This contains the whole string
 
 				if($this->registry->get('basepath')){
@@ -180,4 +180,5 @@ class router {
 		}
 		$this->run_404();
 	}
+
 }
