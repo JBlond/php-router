@@ -46,9 +46,9 @@ Examples
 	});
 	
 	$router->get('/test/(:any)', function () {
-    	print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
-    });
-    
+	    print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+	});
+	
 	$router->add('/post/', function () {
 	    require 'post.html';
 	});
