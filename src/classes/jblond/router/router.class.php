@@ -126,6 +126,17 @@ class router {
 		}
 	}
 
+	private function replace_lambda_patterns($expression){
+		if(strpos($expression, ':') !== false){
+			return str_replace(
+				array(':any', ':num', ':all', ':an', ':url', ':hex'),
+				array('[^/]+', '[0-9]+', '.*', '[0-9A-Za-z]+', '[0-9A-Za-z-_]+', '[0-9A-Fa-f]+'),
+				$expression
+			);
+		}
+		return $expression;
+	}
+
 	/**
 	 * run
 	 */
@@ -141,6 +152,9 @@ class router {
 			if($this->registry->get('basepath')){
 				$route['expression'] = '('.$this->registry->get('basepath').')/'.$route['expression'];
 			}
+
+			//try to find lambda patterns
+			$route['expression'] = $this->replace_lambda_patterns($route['expression']);
 
 			//Add 'find string start' automatically
 			$route['expression'] = '^'.$route['expression'];

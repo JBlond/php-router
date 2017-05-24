@@ -28,6 +28,10 @@ $router->add('/user/(.*)/edit', function ($id) {
 	echo 'Edit user with id ' . $id;
 });
 
+$router->get('/test/(:any)/', function () {
+	print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+});
+
 $router->add('/post/', function () {
 	require 'post.html';
 });

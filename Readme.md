@@ -5,6 +5,16 @@ PHP router
 
 A simple php router class
 
+Supports  
+- lambda URLs: 
+	- **:any** Any sign
+	- **:num** Only numbers
+	- **:all** All characters
+	- **:an** A-Z a-z 0-9
+	- **:url** A-Z a-z 0-9 - _ 
+	- **:hex** hexadecimal 
+- Regex URLs e.g. /user/(.*)/edit
+
 Examples
 
 ```PHP
@@ -35,13 +45,17 @@ Examples
 	    echo 'Edit user with id ' . $id;
 	});
 	
+	$router->get('/test/(:any)', function () {
+    	print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+    });
+    
 	$router->add('/post/', function () {
 	    require 'post.html';
 	});
 	
-	$router->add('/post/reciver/', function () {
+	$router->post('/post/reciver/', function () {
 	    print_r($_POST);
-	}, 'POST');
+	});
 	
 	$router->add404(function ($url) {
 	    header("HTTP/1.0 404 Not Found");
