@@ -102,13 +102,13 @@ class router {
 	 */
 	private function is_method_in_routes($route){
 		if(is_array($route['method'])){
-			if(! in_array($_SERVER['REQUEST_METHOD'], (array) $route['method'])){
+			if(! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])){
 				return true;
 			}
 		}
 		else
 		{
-			if($_SERVER['REQUEST_METHOD'] !== $route['method']){
+			if(filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== $route['method']){
 				return true;
 			}
 		}
