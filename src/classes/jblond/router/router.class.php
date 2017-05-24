@@ -21,7 +21,7 @@ class router {
 
 	/**
 	 * route is found
-	 * @var bool
+	 * @var boolean
 	 */
 	private $route_found;
 
@@ -67,6 +67,24 @@ class router {
 			'function' => $function,
 			'method' => $method
 		));
+	}
+
+	/**
+	 * add a get route
+	 * @param string $expression
+	 * @param mixed $function
+	 */
+	public function get($expression, $function){
+		$this->add($expression, $function, 'GET');
+	}
+
+	/**
+	 * add a post route
+	 * @param string $expression
+	 * @param mixed $function
+	 */
+	public function post($expression, $function){
+		$this->add($expression, $function, 'POST');
 	}
 
 	/**
