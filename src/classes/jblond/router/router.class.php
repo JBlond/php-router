@@ -126,6 +126,10 @@ class router {
 		}
 	}
 
+	/**
+	 * @param string $expression
+	 * @return mixed
+	 */
 	private function replace_lambda_patterns($expression){
 		if(strpos($expression, ':') !== false){
 			return str_replace(
