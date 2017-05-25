@@ -49,7 +49,7 @@ class router {
 	 */
 	public function init(){
 		$this->path = '';
-		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
+		$parsed_url = parse_url( filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL));
 		if(isset($parsed_url['path'])){
 			$this->path = trim($parsed_url['path']);
 		}
