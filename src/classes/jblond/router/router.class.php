@@ -139,6 +139,27 @@ class router {
 	}
 
 	/**
+	 * @param array $route
+	 * @return mixed
+	 */
+	private function prepare_route( $route){
+		if($this->registry->get('basepath')){
+			$route['expression'] = '(' .$this->registry->get('basepath') . ')/' . $route['expression'];
+		}
+
+		//try to find lambda patterns
+		$route['expression'] = $this->replace_lambda_patterns($route['expression']);
+
+		//Add 'find string start' automatically
+		$route['expression'] = '^'.$route['expression'];
+
+		//Add 'find string end' automatically
+		$route['expression'] = $route['expression'] . '$';
+
+		return $route;
+	}
+
+	/**
 	 * run
 	 */
 	public function run(){
@@ -150,18 +171,7 @@ class router {
 				continue;
 			}
 
-			if($this->registry->get('basepath')){
-				$route['expression'] = '(' .$this->registry->get('basepath') . ')/' . $route['expression'];
-			}
-
-			//try to find lambda patterns
-			$route['expression'] = $this->replace_lambda_patterns($route['expression']);
-
-			//Add 'find string start' automatically
-			$route['expression'] = '^'.$route['expression'];
-
-			//Add 'find string end' automatically
-			$route['expression'] = $route['expression'] . '$';
+			$route = $this->prepare_route( $route);
 
 			//check match
 			if(preg_match('#' . $route['expression'].'#', $this->path, $matches)){
