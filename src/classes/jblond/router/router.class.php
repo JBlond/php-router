@@ -106,11 +106,8 @@ class router {
 				return true;
 			}
 		}
-		else
-		{
-			if(filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== $route['method']){
-				return true;
-			}
+		elseif(filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== $route['method']){
+			return true;
 		}
 		return false;
 	}
