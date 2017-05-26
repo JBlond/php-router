@@ -45,6 +45,14 @@ class router {
 	}
 
 	/**
+	 * set base_path
+	 * @param string $base_path
+	 */
+	public function set_basepath($base_path = ''){
+		$this->registry->set('basepath', $base_path);
+	}
+
+	/**
 	 * init
 	 */
 	public function init(){

@@ -2,7 +2,7 @@
 require 'classes/jblond/autoloader.class.php';
 new \jblond\autoloader();
 $router = new \jblond\router\router();
-$router->registry->set('basepath', '');
+$router->set_basepath('');
 $router->init();
 
 $router->add('/', function () {
