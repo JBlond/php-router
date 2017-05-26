@@ -100,7 +100,7 @@ class router {
 	 * @param array $route
 	 * @return bool
 	 */
-	private function is_method_in_routes($route){
+	private function is_method_not_in_routes($route){
 		if(is_array($route['method'])){
 			if(! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])){
 				return true;
@@ -167,7 +167,8 @@ class router {
 
 		foreach($this->routes as $route){
 
-			if($this->is_method_in_routes($route)){
+			if($this->is_method_not_in_routes($route)){
+				// skip this route
 				continue;
 			}
 
@@ -183,6 +184,7 @@ class router {
 
 				call_user_func_array($route['function'], $matches);
 				$this->route_found = true;
+				break;
 			}
 		}
 		$this->run_404();
