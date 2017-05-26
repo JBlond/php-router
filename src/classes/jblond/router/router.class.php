@@ -184,6 +184,7 @@ class router {
 
 				call_user_func_array($route['function'], $matches);
 				$this->route_found = true;
+				// we are done here stop the loop
 				break;
 			}
 		}
