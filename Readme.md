@@ -3,7 +3,7 @@ PHP router
 
 [![Code Climate](https://codeclimate.com/github/JBlond/php-router/badges/gpa.svg)](https://codeclimate.com/github/JBlond/php-router) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a89005f98a484c2db2baa832c5bd573b)](https://www.codacy.com/app/leet31337/php-router?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JBlond/php-router&amp;utm_campaign=Badge_Grade)  [![SensioLabsInsight](https://insight.sensiolabs.com/projects/9dcb9412-a54b-491d-afc1-072b97cc4ecc/mini.png)](https://insight.sensiolabs.com/projects/9dcb9412-a54b-491d-afc1-072b97cc4ecc)
 
-A simple php router class
+##A simple php router class
 
 Supports  
 - lambda URLs: 
@@ -15,8 +15,9 @@ Supports
 	- **:hex** hexadecimal 
 - Regex URLs e.g. /user/(.*)/edit
 
-Examples
+##Examples
 
+###Static routes
 ```PHP
 	require 'jblond/autoloader.class.php';
 	new \jblond\autoloader();
@@ -35,12 +36,17 @@ Examples
 	$router->add('/test.html', function () {
 	    echo 'test.html Welcome';
 	});
-	
-	$router->add('/closure', function () use ($class_object) {
-	    // $class_object->...
-	    echo 'closure';
+	$router->add('/post/', function () {
+		require 'post.html';
 	});
-	
+
+	$router->post('/post/reciver/', function () {
+	    print_r($_POST);
+	});
+```
+
+### dynamic routes
+```PHP	
 	$router->add('/user/(.*)/edit', function ($id) {
 	    echo 'Edit user with id ' . $id;
 	});
@@ -49,14 +55,20 @@ Examples
 	    print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
 	});
 	
-	$router->add('/post/', function () {
-	    require 'post.html';
+```
+
+### Integration with other libraries aka using closure
+```PHP
+	$tpl = new \Acme\Template\Template();
+	$router->add('/closure', function () use ($tpl) {
+	    // $tpl->...
+	    echo 'closure';
 	});
+```
+
+### Define 404 not found page	
 	
-	$router->post('/post/reciver/', function () {
-	    print_r($_POST);
-	});
-	
+```PHP
 	$router->add404(function ($url) {
 	    header("HTTP/1.0 404 Not Found");
 	    echo '404 :-( ' . $url;
@@ -64,12 +76,12 @@ Examples
 	$router->run();
 ```
 
-Apache rewrite config
+###Apache rewrite config
 
 ```
 		RewriteEngine on
 		RewriteBase /
 		RewriteCond %{REQUEST_FILENAME} !-f
 		RewriteCond %{REQUEST_FILENAME} !-d
-		RewriteRule ^(.*)$ index.php [QSA]
+		RewriteRule ^(.*)$ index.php [QSA,L]
 ```
