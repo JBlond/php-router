@@ -15,9 +15,9 @@ Supports
 	- **:hex** hexadecimal 
 - Regex URLs e.g. /user/(.*)/edit
 
-##Examples
+## Examples
 
-###Static routes
+### Static routes
 ```PHP
 	require 'jblond/autoloader.class.php';
 	new \jblond\autoloader();
@@ -76,7 +76,7 @@ Supports
 	$router->run();
 ```
 
-###Apache rewrite config
+### Apache rewrite config
 
 ```
 		RewriteEngine on
