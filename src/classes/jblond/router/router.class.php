@@ -190,7 +190,9 @@ class router {
 					array_shift($matches);//Remove Base path
 				}
 
-				call_user_func_array($route['function'], $matches);
+				if(is_callable($route['function'])){
+					call_user_func_array($route['function'], $matches);
+				}
 				$this->route_found = true;
 				// we are done here stop the loop
 				break;
