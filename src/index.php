@@ -40,6 +40,11 @@ $router->post('/post/reciver/', function () {
 	// can print_r POST vars
 });
 
+$router->get('/503/', function (){
+	$response = new \jblond\router\responses();
+	$response->error_503();
+});
+
 $router->add404(function ($url) {
 	header("HTTP/1.0 404 Not Found");
 	echo '404 :-( ' . $url;

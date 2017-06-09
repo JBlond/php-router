@@ -76,6 +76,12 @@ Supports
 	$router->run();
 ```
 
+### Responses
+```$router->get('/503/', function (){
+	    $response = new \jblond\router\responses();
+	    $response->error_503();
+	});
+
 ### Apache rewrite config
 
 ```
