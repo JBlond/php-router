@@ -77,7 +77,8 @@ Supports
 ```
 
 ### Responses
-```$router->get('/503/', function (){
+```PHP
+	$router->get('/503/', function (){
 	    $response = new \jblond\router\responses();
 	    $response->error_503();
 	});
