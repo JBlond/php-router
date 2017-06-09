@@ -81,6 +81,7 @@ Supports
 	    $response = new \jblond\router\responses();
 	    $response->error_503();
 	});
+```
 
 ### Apache rewrite config
 
