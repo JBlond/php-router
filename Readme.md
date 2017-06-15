@@ -113,6 +113,8 @@ Optional route subpattern can be made of using `?`  aftern the normal pattern.
 
 For the regexpattern see https://regexper.com/#%2Fphonebook(%5C%2F%5BA-Za-z%5D%2B(%5C%2F%5BA-Za-z%5D%2B(%5C%2F%5BA-Za-z%5D%2B(%5C%2F%5B0-9-%5D%2B)%3F)%3F)%3F)%3F%2F
 
+Also good for testing your regex: http://www.phpliveregex.com/ use preg_match
+
 ### Apache rewrite config
 
 ```
