@@ -28,96 +28,96 @@ Supports
 
 ### Static routes
 ```PHP
-	require 'jblond/autoloader.class.php';
-	new \jblond\autoloader();
-	$router = new \jblond\router\router();
-	$router->set_basepath('');
-	$router->init();
-	
-	$router->add('/', function () {
-	    echo 'Welcome';
-	});
-	
-	$router->add('/info/', function () {
-	    phpinfo();
-	});
-	
-	$router->add('/test.html', function () {
-	    echo 'test.html Welcome';
-	});
-	$router->add('/post/', function () {
-		require 'post.html';
-	});
+require 'jblond/autoloader.class.php';
+new \jblond\autoloader();
+$router = new \jblond\router\router();
+$router->set_basepath('');
+$router->init();
 
-	$router->post('/post/reciver/', function () {
-	    print_r($_POST);
-	});
+$router->add('/', function () {
+    echo 'Welcome';
+});
+
+$router->add('/info/', function () {
+    phpinfo();
+});
+
+$router->add('/test.html', function () {
+    echo 'test.html Welcome';
+});
+$router->add('/post/', function () {
+	require 'post.html';
+});
+
+$router->post('/post/reciver/', function () {
+    print_r($_POST);
+});
 ```
 
 ### dynamic routes
 ```PHP	
-	$router->add('/user/(.*)/edit', function ($id) {
-	    echo 'Edit user with id ' . $id;
-	});
-	
-	$router->get('/test/(:any)', function () {
-	    print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
-	});
+$router->add('/user/(.*)/edit', function ($id) {
+    echo 'Edit user with id ' . $id;
+});
+
+$router->get('/test/(:any)', function () {
+    print_r(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+});
 	
 ```
 
 ### Integration with other libraries aka using closure
 ```PHP
-	$tpl = new \Acme\Template\Template();
-	$router->add('/closure', function () use ($tpl) {
-	    // $tpl->...
-	    echo 'closure';
-	});
+$tpl = new \Acme\Template\Template();
+$router->add('/closure', function () use ($tpl) {
+    // $tpl->...
+    echo 'closure';
+});
 ```
 
 ### Define 404 not found page	
 	
 ```PHP
-	$router->add404(function ($url) {
-	    header("HTTP/1.0 404 Not Found");
-	    echo '404 :-( ' . $url;
-	});
-	$router->run();
+$router->add404(function ($url) {
+    header("HTTP/1.0 404 Not Found");
+    echo '404 :-( ' . $url;
+});
+$router->run();
 ```
 
 ### Responses
 ```PHP
-	$router->get('/503/', function (){
-	    $response = new \jblond\router\responses();
-	    $response->error_503();
-	});
+$router->get('/503/', function (){
+    $response = new \jblond\router\responses();
+    $response->error_503();
+});
 ```
 
 ### Optional Subpatterns
 Optional route subpattern can be made of using `?`  aftern the normal pattern.
 
 ```PHP
-	$router->get(
-	    '/phonebook(\/[A-Za-z]+(\/[A-Za-z]+(\/[A-Za-z]+(\/[0-9-]+)?)?)?)?/',
-	    function ($lastname = null, $surname = null, $street = null, $number = null) {
-	        if(!$lastname) {
-	            echo 'Phonebook all entries';
-	            return;
-	        }
-	        if(!$surname){
-	            echo 'Phonebook lookup lastname: ' . $lastname;
-	            return;
-	        }
-	        if(!$street){
-	            echo 'Phonebook lookup lastname: ' . $lastname . ' Surname: ' . $surname;
-	            return;
-	        }
-	        if(!$number){
-	            echo 'Phonebook lookup lastname: ' . $lastname . ' Surname: ' . $surname . ' Street: ' . $street;
-	            return;
-	        }
-	        echo ' FULL SEARCH';
-	});
+$router->get(
+    '/phonebook(\/[A-Za-z]+(\/[A-Za-z]+(\/[A-Za-z]+(\/[0-9-]+)?)?)?)?/',
+    function ($lastname = null, $surname = null, $street = null, $number = null) {
+        if(!$lastname) {
+            echo 'Phonebook all entries';
+            return;
+        }
+        if(!$surname){
+            echo 'Phonebook lookup lastname: ' . $lastname;
+            return;
+        }
+        if(!$street){
+            echo 'Phonebook lookup lastname: ' . $lastname . ' Surname: ' . $surname;
+            return;
+        }
+        if(!$number){
+            echo 'Phonebook lookup lastname: ' . $lastname . ' Surname: ' . $surname . ' Street: ' . $street;
+            return;
+        }
+        echo ' FULL SEARCH';
+});
 ```
 
 For the regexpattern see https://regexper.com/#%2Fphonebook(%5C%2F%5BA-Za-z%5D%2B(%5C%2F%5BA-Za-z%5D%2B(%5C%2F%5BA-Za-z%5D%2B(%5C%2F%5B0-9-%5D%2B)%3F)%3F)%3F)%3F%2F
@@ -127,9 +127,9 @@ Also good for testing your regex: http://www.phpliveregex.com/ use preg_match
 ### Apache rewrite config
 
 ```
-		RewriteEngine on
-		RewriteBase /
-		RewriteCond %{REQUEST_FILENAME} !-f
-		RewriteCond %{REQUEST_FILENAME} !-d
-		RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
 ```
