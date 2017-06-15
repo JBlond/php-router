@@ -5,6 +5,8 @@ PHP router
 
 ## A simple php router class
 
+Less than 300 lines of code with comments
+
 Supports  
 - lambda URLs: 
 	- **:any** Any sign
@@ -14,6 +16,13 @@ Supports
 	- **:url** A-Z a-z 0-9 - _ 
 	- **:hex** hexadecimal 
 - Regex URLs e.g. /user/(.*)/edit
+- Optional Subroutes
+- Works in Subdirs, if you use `->set_basepath('/yoursubdir')` 
+- Custom response headers
+	- download
+	- header(s)
+	- redirect
+	- 503 error
 
 ## Examples
 
@@ -22,7 +31,7 @@ Supports
 	require 'jblond/autoloader.class.php';
 	new \jblond\autoloader();
 	$router = new \jblond\router\router();
-	$router->registry->set('basepath', '');
+	$router->set_basepath('');
 	$router->init();
 	
 	$router->add('/', function () {
