@@ -84,6 +84,33 @@ Supports
 	});
 ```
 
+### Optional Subpatterns
+Optional route subpattern can be made of using `?`  aftern the normal pattern.
+
+```PHP
+	$router->get(
+	    '/phonebook(\/[A-Za-z]+(\/[A-Za-z]+(\/[A-Za-z]+(\/[0-9-]+)?)?)?)?/',
+	    function ($lastname = null, $surname = null, $street = null, $number = null) {
+	        if(!$lastname) {
+	            echo 'Phonebook all entries';
+	            return;
+	        }
+	        if(!$surname){
+	            echo 'Phonebook lookup lastname: ' . $lastname;
+	            return;
+	        }
+	        if(!$street){
+	            echo 'Phonebook lookup lastname: ' . $lastname . ' Surname: ' . $surname;
+	            return;
+	        }
+	        if(!$number){
+	            echo 'Phonebook lookup lastname: ' . $lastname . ' Surname: ' . $surname . ' Street: ' . $street;
+	            return;
+	        }
+	        echo ' FULL SEARCH';
+	});
+```
+
 ### Apache rewrite config
 
 ```
