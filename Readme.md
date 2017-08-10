@@ -1,7 +1,8 @@
 PHP router
 ======================
 
-[![Code Climate](https://codeclimate.com/github/JBlond/php-router/badges/gpa.svg)](https://codeclimate.com/github/JBlond/php-router) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a89005f98a484c2db2baa832c5bd573b)](https://www.codacy.com/app/leet31337/php-router?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JBlond/php-router&amp;utm_campaign=Badge_Grade)  [![SensioLabsInsight](https://insight.sensiolabs.com/projects/9dcb9412-a54b-491d-afc1-072b97cc4ecc/mini.png)](https://insight.sensiolabs.com/projects/9dcb9412-a54b-491d-afc1-072b97cc4ecc)
+[![Code Climate](https://codeclimate.com/github/JBlond/php-router/badges/gpa.svg)](https://codeclimate.com/github/JBlond/php-router) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a89005f98a484c2db2baa832c5bd573b)](https://www.codacy.com/app/leet31337/php-router?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=JBlond/php-router&amp;utm_campaign=Badge_Grade) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FJBlond%2Fphp-router.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FJBlond%2Fphp-router?ref=badge_shield)
+ [![SensioLabsInsight](https://insight.sensiolabs.com/projects/9dcb9412-a54b-491d-afc1-072b97cc4ecc/mini.png)](https://insight.sensiolabs.com/projects/9dcb9412-a54b-491d-afc1-072b97cc4ecc)
 
 ## A simple php router class
 
@@ -133,3 +134,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FJBlond%2Fphp-router.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FJBlond%2Fphp-router?ref=badge_large)
