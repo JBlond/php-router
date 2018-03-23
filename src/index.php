@@ -36,8 +36,14 @@ $router->add('/post/', function () {
 	require 'post.html';
 });
 
+$router->add('/pöst/', function () {
+	require 'post.html';
+});
+
 $router->post('/post/reciver/', function () {
-	// can print_r POST vars
+	echo '<pre>';
+	print_r(filter_input_array(INPUT_POST));
+	echo '</pre>';
 });
 
 $router->get('/503/', function (){

@@ -181,9 +181,8 @@ class router {
 			}
 
 			$route = $this->prepare_route( $route);
-
 			//check match
-			if(preg_match('#' . $route['expression'].'#', $this->path, $matches)){
+			if(preg_match('#' . $route['expression'].'#', urldecode($this->path), $matches)){
 				array_shift($matches); //Always remove first element. This contains the whole string
 
 				if($this->registry->get('basepath')){
