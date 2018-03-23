@@ -41,9 +41,7 @@ $router->add('/pöst/', function () {
 });
 
 $router->post('/post/reciver/', function () {
-	//echo '<pre>';
-	//print_r(filter_input_array(INPUT_POST));
-	//echo '</pre>';
+
 });
 
 $router->get('/503/', function (){
