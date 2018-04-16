@@ -53,6 +53,20 @@ class responses {
 	}
 
 	/**
+	 *
+	 */
+	public function error404(){
+		header("HTTP/1.1 404 Not Found");
+	}
+
+	/**
+	 *
+	 */
+	public function error405(){
+		header("HTTP/1.1 405 Method Not Allowed");
+	}
+
+	/**
 	 * send a 503 error to the client
 	 */
 	public function error_503(){
