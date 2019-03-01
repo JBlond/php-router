@@ -3,11 +3,22 @@
     "description": "A simple php router class",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "php",
+        "router"
+    ],
     "authors": [
         {
             "name": "JBlond",
             "email": "leet31337@web.de"
         }
     ],
-    "minimum-stability": "dev"
+    "require": {
+        "php" : ">= 7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "jblond\\": "src/classes/jblond"
+        }
+    }
 }
