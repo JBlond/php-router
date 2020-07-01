@@ -24,6 +24,12 @@ Supports
 	- redirect
 	- 503 error
 
+## Install
+
+```
+composer require jblond/php-router
+```
+
 ## Examples
 
 ### Static routes
