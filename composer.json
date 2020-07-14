@@ -17,6 +17,7 @@
         "php" : ">= 7.0"
     },
     "require-dev": {
+       "phan/phan": "3.0.5",
         "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
@@ -25,6 +26,7 @@
         }
     },
     "scripts": {
-        "php_src": "phpcs --standard=phpcs.xml --ignore=*vendor/* -s -p --colors ./"
+      "php_src": "phpcs --standard=phpcs.xml --ignore=*vendor/* -s -p --colors ./",
+      "phan": "phan"
     }
 }

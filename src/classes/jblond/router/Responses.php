@@ -32,7 +32,7 @@ class Responses
      */
     public function header($type, $value = '')
     {
-        if($value !== ''){
+        if ($value !== '') {
             header("$type: $value");
             return true;
         }
@@ -45,7 +45,7 @@ class Responses
      */
     public function headers($header_array)
     {
-        foreach ($header_array as $header => $value){
+        foreach ($header_array as $header => $value) {
             $this->header($header, $value);
         }
     }
@@ -77,10 +77,9 @@ class Responses
     /**
      * send a 503 error to the client
      */
-    public function error_503()
+    public function error503()
     {
         $this->header('HTTP/1.1 503 Service Unavailable');
         $this->header('Status', '503 Service Unavailable');
     }
-
 }

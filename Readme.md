@@ -95,7 +95,7 @@ $router->run();
 ```PHP
 $router->get('/503/', function (){
     $response = new \jblond\router\Responses();
-    $response->error_503();
+    $response->error503();
 });
 ```
 

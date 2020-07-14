@@ -52,7 +52,7 @@ $router->post('/post/reciver/', function () {
 
 $router->get('/503/', function () {
     $response = new Responses();
-    $response->error_503();
+    $response->error503();
 });
 
 $router->add404(function ($url) {
