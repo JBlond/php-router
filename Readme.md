@@ -34,7 +34,7 @@ composer require jblond/php-router
 
 ### Static routes
 ```PHP
-require 'jblond/autoloader.php';
+require 'jblond/Autoloader.php';
 new \jblond\Autoloader();
 $router = new \jblond\router\Router();
 $router->setBasepath('');
