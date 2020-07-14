@@ -51,7 +51,7 @@ class Router
      * set base_path
      * @param string $base_path
      */
-    public function setBasepath($base_path = '')
+    public function setBasepath(string $base_path = '')
     {
         $this->registry->set('basepath', $base_path);
     }
@@ -74,7 +74,7 @@ class Router
      * @param mixed $function
      * @param string|array $method default is GET
      */
-    public function add($expression, $function, $method = array('GET'))
+    public function add(string $expression, $function, $method = array('GET'))
     {
         array_push($this->routes, array(
             'expression' => $expression,
@@ -88,7 +88,7 @@ class Router
      * @param string $expression
      * @param mixed $function
      */
-    public function get($expression, $function)
+    public function get(string $expression, $function)
     {
         $this->add($expression, $function, 'GET');
     }
@@ -98,7 +98,7 @@ class Router
      * @param string $expression
      * @param mixed $function
      */
-    public function post($expression, $function)
+    public function post(string $expression, $function)
     {
         $this->add($expression, $function, 'POST');
     }
@@ -117,7 +117,7 @@ class Router
      * @param array $route
      * @return bool
      */
-    private function isMethodNotInRoutes($route)
+    private function isMethodNotInRoutes(array $route)
     {
         if (is_array($route['method'])) {
             if (! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])) {
@@ -145,7 +145,7 @@ class Router
      * @param string $expression
      * @return mixed
      */
-    private function replaceLambdaPatterns($expression)
+    private function replaceLambdaPatterns(string $expression)
     {
         if (strpos($expression, ':') !== false) {
             return str_replace(
@@ -161,7 +161,7 @@ class Router
      * @param array $route
      * @return mixed
      */
-    private function prepareRoute($route)
+    private function prepareRoute(array $route)
     {
         if ($this->registry->get('basepath')) {
             $route['expression'] = '(' . $this->registry->get('basepath') . ')/' . $route['expression'];

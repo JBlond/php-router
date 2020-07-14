@@ -13,7 +13,7 @@ class Responses
      * @param string $file file with path
      * @param string $name name for the client
      */
-    public function download($file, $name)
+    public function download(string $file, string $name)
     {
         $this->headers(
             array(
@@ -30,7 +30,7 @@ class Responses
      * @param string $value optional parameter
      * @return bool
      */
-    public function header($type, $value = '')
+    public function header(string $type, string $value = ''): bool
     {
         if ($value !== '') {
             header("$type: $value");
@@ -43,7 +43,7 @@ class Responses
     /**
      * @param array $header_array Header => Value
      */
-    public function headers($header_array)
+    public function headers(array $header_array)
     {
         foreach ($header_array as $header => $value) {
             $this->header($header, $value);
@@ -53,7 +53,7 @@ class Responses
     /**
      * @param string $location
      */
-    public function redirect($location)
+    public function redirect(string $location)
     {
         header('Location: ' . $location, true, 302);
     }
