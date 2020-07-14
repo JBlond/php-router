@@ -2,12 +2,12 @@
 
 use jblond\autoloader;
 use jblond\router\responses;
-use jblond\router\router;
+use jblond\router\Router;
 
 require 'classes/jblond/autoloader.php';
 
 new autoloader();
-$router = new router();
+$router = new Router();
 $router->setBasepath('');
 $router->init();
 

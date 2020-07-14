@@ -6,7 +6,7 @@ namespace jblond\router;
  * Class router
  * @package jblond\router
  */
-class router
+class Router
 {
 
     /**

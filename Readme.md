@@ -36,7 +36,7 @@ composer require jblond/php-router
 ```PHP
 require 'jblond/autoloader.php';
 new \jblond\autoloader();
-$router = new \jblond\router\router();
+$router = new \jblond\router\Router();
 $router->setBasepath('');
 $router->init();
 
