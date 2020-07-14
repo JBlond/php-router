@@ -1,8 +1,14 @@
 <?php
+
+use jblond\autoloader;
+use jblond\router\responses;
+use jblond\router\router;
+
 require 'classes/jblond/autoloader.php';
-new \jblond\autoloader();
-$router = new \jblond\router\router();
-$router->set_basepath('');
+
+new autoloader();
+$router = new router();
+$router->setBasepath('');
 $router->init();
 
 $router->add('/', function () {
@@ -41,11 +47,11 @@ $router->add('/pöst/', function () {
 });
 
 $router->post('/post/reciver/', function () {
-
+    print_r($_POST);
 });
 
-$router->get('/503/', function (){
-    $response = new \jblond\router\responses();
+$router->get('/503/', function () {
+    $response = new responses();
     $response->error_503();
 });
 

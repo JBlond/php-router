@@ -1,11 +1,13 @@
 <?php
+
 namespace jblond\router;
 
 /**
  * Class router
  * @package jblond\router
  */
-class router {
+class router
+{
 
     /**
      * array of routes
@@ -40,7 +42,8 @@ class router {
     /**
      * router constructor.
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->registry = new registry();
     }
 
@@ -48,17 +51,19 @@ class router {
      * set base_path
      * @param string $base_path
      */
-    public function set_basepath($base_path = ''){
+    public function setBasepath($base_path = '')
+    {
         $this->registry->set('basepath', $base_path);
     }
 
     /**
      * init
      */
-    public function init(){
+    public function init()
+    {
         $this->path = '';
-        $parsed_url = parse_url( filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL));
-        if(isset($parsed_url['path'])){
+        $parsed_url = parse_url(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL));
+        if (isset($parsed_url['path'])) {
             $this->path = trim($parsed_url['path']);
         }
     }
@@ -69,7 +74,8 @@ class router {
      * @param mixed $function
      * @param string|array $method default is GET
      */
-    public function add($expression, $function, $method = array('GET')){
+    public function add($expression, $function, $method = array('GET'))
+    {
         array_push($this->routes, array(
             'expression' => $expression,
             'function' => $function,
@@ -82,7 +88,8 @@ class router {
      * @param string $expression
      * @param mixed $function
      */
-    public function get($expression, $function){
+    public function get($expression, $function)
+    {
         $this->add($expression, $function, 'GET');
     }
 
@@ -91,7 +98,8 @@ class router {
      * @param string $expression
      * @param mixed $function
      */
-    public function post($expression, $function){
+    public function post($expression, $function)
+    {
         $this->add($expression, $function, 'POST');
     }
 
@@ -99,7 +107,8 @@ class router {
      * add 404
      * @param mixed $function
      */
-    public function add404($function){
+    public function add404($function)
+    {
         array_push($this->routes404, $function);
     }
 
@@ -108,13 +117,13 @@ class router {
      * @param array $route
      * @return bool
      */
-    private function is_method_not_in_routes($route){
-        if(is_array($route['method'])){
-            if(! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])){
+    private function isMethodNotInRoutes($route)
+    {
+        if (is_array($route['method'])) {
+            if (! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])) {
                 return true;
             }
-        }
-        elseif(filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== $route['method']){
+        } elseif (filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== $route['method']) {
             return true;
         }
         return false;
@@ -123,9 +132,10 @@ class router {
     /**
      * run all 404 routes
      */
-    private function run_404(){
-        if(!$this->route_found){
-            foreach($this->routes404 as $route404){
+    private function run404()
+    {
+        if (!$this->route_found) {
+            foreach ($this->routes404 as $route404) {
                 call_user_func_array($route404, array($this->path));
             }
         }
@@ -135,8 +145,9 @@ class router {
      * @param string $expression
      * @return mixed
      */
-    private function replace_lambda_patterns($expression){
-        if(strpos($expression, ':') !== false){
+    private function replaceLambdaPatterns($expression)
+    {
+        if (strpos($expression, ':') !== false) {
             return str_replace(
                 array(':any', ':num', ':all', ':an', ':url', ':hex'),
                 array('[^/]+', '[0-9]+', '.*', '[0-9A-Za-z]+', '[0-9A-Za-z-_]+', '[0-9A-Fa-f]+'),
@@ -150,16 +161,17 @@ class router {
      * @param array $route
      * @return mixed
      */
-    private function prepare_route( $route){
-        if($this->registry->get('basepath')){
-            $route['expression'] = '(' .$this->registry->get('basepath') . ')/' . $route['expression'];
+    private function prepareRoute($route)
+    {
+        if ($this->registry->get('basepath')) {
+            $route['expression'] = '(' . $this->registry->get('basepath') . ')/' . $route['expression'];
         }
 
         //try to find lambda patterns
-        $route['expression'] = $this->replace_lambda_patterns($route['expression']);
+        $route['expression'] = $this->replaceLambdaPatterns($route['expression']);
 
         //Add 'find string start' automatically
-        $route['expression'] = '^'.$route['expression'];
+        $route['expression'] = '^' . $route['expression'];
 
         //Add 'find string end' automatically
         $route['expression'] = $route['expression'] . '$';
@@ -170,26 +182,26 @@ class router {
     /**
      * run
      */
-    public function run(){
+    public function run()
+    {
         $this->route_found = false;
 
-        foreach($this->routes as $route){
-
-            if($this->is_method_not_in_routes($route)){
+        foreach ($this->routes as $route) {
+            if ($this->isMethodNotInRoutes($route)) {
                 // skip this route
                 continue;
             }
 
-            $route = $this->prepare_route( $route);
+            $route = $this->prepareRoute($route);
             //check match
-            if(preg_match('#' . $route['expression'].'#', urldecode($this->path), $matches)){
+            if (preg_match('#' . $route['expression'] . '#', urldecode($this->path), $matches)) {
                 array_shift($matches); //Always remove first element. This contains the whole string
 
-                if($this->registry->get('basepath')){
+                if ($this->registry->get('basepath')) {
                     array_shift($matches);//Remove Base path
                 }
 
-                if(is_callable($route['function'])){
+                if (is_callable($route['function'])) {
                     call_user_func_array($route['function'], $matches);
                 }
                 $this->route_found = true;
@@ -197,7 +209,6 @@ class router {
                 break;
             }
         }
-        $this->run_404();
+        $this->run404();
     }
-
 }

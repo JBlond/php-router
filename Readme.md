@@ -37,7 +37,7 @@ composer require jblond/php-router
 require 'jblond/autoloader.php';
 new \jblond\autoloader();
 $router = new \jblond\router\router();
-$router->set_basepath('');
+$router->setBasepath('');
 $router->init();
 
 $router->add('/', function () {
