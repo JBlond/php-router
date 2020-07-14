@@ -5,7 +5,7 @@ namespace jblond;
  * Class autoloader
  * @package jblond
  */
-class autoloader {
+class Autoloader {
 
     /**
      * autoloader constructor.

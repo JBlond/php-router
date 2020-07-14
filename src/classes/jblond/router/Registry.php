@@ -5,7 +5,7 @@ namespace jblond\router;
  * Class registry
  * @package jblond\router
  */
-class registry {
+class Registry {
 
     /**
      * @var array

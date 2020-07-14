@@ -6,7 +6,7 @@ namespace jblond\router;
  * Class responses
  * @package jblond\router
  */
-class responses
+class Responses
 {
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-use jblond\autoloader;
-use jblond\router\responses;
+use jblond\Autoloader;
+use jblond\router\Responses;
 use jblond\router\Router;
 
-require 'classes/jblond/autoloader.php';
+require 'classes/jblond/Autoloader.php';
 
-new autoloader();
+new Autoloader();
 $router = new Router();
 $router->setBasepath('');
 $router->init();
@@ -51,7 +51,7 @@ $router->post('/post/reciver/', function () {
 });
 
 $router->get('/503/', function () {
-    $response = new responses();
+    $response = new Responses();
     $response->error_503();
 });
 

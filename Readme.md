@@ -35,7 +35,7 @@ composer require jblond/php-router
 ### Static routes
 ```PHP
 require 'jblond/autoloader.php';
-new \jblond\autoloader();
+new \jblond\Autoloader();
 $router = new \jblond\router\Router();
 $router->setBasepath('');
 $router->init();
@@ -94,7 +94,7 @@ $router->run();
 ### Responses
 ```PHP
 $router->get('/503/', function (){
-    $response = new \jblond\router\responses();
+    $response = new \jblond\router\Responses();
     $response->error_503();
 });
 ```

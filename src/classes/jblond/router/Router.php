@@ -35,7 +35,7 @@ class Router
 
     /**
      * registry object
-     * @var registry
+     * @var Registry
      */
     public $registry;
 
@@ -44,7 +44,7 @@ class Router
      */
     public function __construct()
     {
-        $this->registry = new registry();
+        $this->registry = new Registry();
     }
 
     /**
