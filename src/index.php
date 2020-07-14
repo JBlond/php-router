@@ -1,5 +1,5 @@
 <?php
-require 'classes/jblond/autoloader.class.php';
+require 'classes/jblond/autoloader.php';
 new \jblond\autoloader();
 $router = new \jblond\router\router();
 $router->set_basepath('');

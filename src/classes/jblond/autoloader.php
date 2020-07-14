@@ -19,9 +19,9 @@ class autoloader {
      */
     private function __autoload( $class){
         $class = str_replace('\\', '/', $class); // revert path for old PHP on Linux
-        if(file_exists('classes/' . $class . '.class.php')){
+        if(file_exists('classes/' . $class . '.php')){
             /** @noinspection PhpIncludeInspection */
-            require 'classes/' . $class . '.class.php';
+            require 'classes/' . $class . '.php';
         }
     }
 
