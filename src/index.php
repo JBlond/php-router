@@ -30,7 +30,7 @@ $router->add('/closure', function () use ($class_object) {
 });
 */
 
-$router->add('/user/(.*)/edit', function ($id) {
+$router->add('/user/(.*)/edit', function (int $id) {
     echo 'Edit user with id ' . $id;
 }, array('GET', 'POST'));
 
@@ -55,7 +55,7 @@ $router->get('/503/', function () {
     $response->error503();
 });
 
-$router->add404(function ($url) {
+$router->add404(function (string $url) {
     header("HTTP/1.0 404 Not Found");
     echo '404 :-( ' . $url;
 });

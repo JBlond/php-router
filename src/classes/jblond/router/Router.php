@@ -45,13 +45,15 @@ class Router
     public function __construct()
     {
         $this->registry = new Registry();
+        $this->path = '';
+        $this->route_found = false;
     }
 
     /**
      * set base_path
      * @param string $base_path
      */
-    public function setBasepath(string $base_path = '')
+    public function setBasepath(string $base_path = ''): void
     {
         $this->registry->set('basepath', $base_path);
     }
@@ -59,9 +61,8 @@ class Router
     /**
      * init
      */
-    public function init()
+    public function init(): void
     {
-        $this->path = '';
         $parsed_url = parse_url(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL));
         if (isset($parsed_url['path'])) {
             $this->path = trim($parsed_url['path']);
@@ -74,7 +75,7 @@ class Router
      * @param mixed $function
      * @param string|array $method default is GET
      */
-    public function add(string $expression, $function, $method = array('GET'))
+    public function add(string $expression, $function, $method = array('GET')): void
     {
         array_push($this->routes, array(
             'expression' => $expression,
@@ -88,7 +89,7 @@ class Router
      * @param string $expression
      * @param mixed $function
      */
-    public function get(string $expression, $function)
+    public function get(string $expression, $function): void
     {
         $this->add($expression, $function, 'GET');
     }
@@ -98,7 +99,7 @@ class Router
      * @param string $expression
      * @param mixed $function
      */
-    public function post(string $expression, $function)
+    public function post(string $expression, $function): void
     {
         $this->add($expression, $function, 'POST');
     }
@@ -107,7 +108,7 @@ class Router
      * add 404
      * @param mixed $function
      */
-    public function add404($function)
+    public function add404($function): void
     {
         array_push($this->routes404, $function);
     }
@@ -117,7 +118,7 @@ class Router
      * @param array $route
      * @return bool
      */
-    private function isMethodNotInRoutes(array $route)
+    private function isMethodNotInRoutes(array $route): bool
     {
         if (is_array($route['method'])) {
             if (! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])) {
@@ -132,7 +133,7 @@ class Router
     /**
      * run all 404 routes
      */
-    private function run404()
+    private function run404(): void
     {
         if (!$this->route_found) {
             foreach ($this->routes404 as $route404) {
@@ -182,10 +183,8 @@ class Router
     /**
      * run
      */
-    public function run()
+    public function run(): void
     {
-        $this->route_found = false;
-
         foreach ($this->routes as $route) {
             if ($this->isMethodNotInRoutes($route)) {
                 // skip this route

@@ -12,6 +12,7 @@ class Responses
     /**
      * @param string $file file with path
      * @param string $name name for the client
+     * @return void|int
      */
     public function download(string $file, string $name)
     {
@@ -43,7 +44,7 @@ class Responses
     /**
      * @param array $header_array Header => Value
      */
-    public function headers(array $header_array)
+    public function headers(array $header_array): void
     {
         foreach ($header_array as $header => $value) {
             $this->header($header, $value);
@@ -53,7 +54,7 @@ class Responses
     /**
      * @param string $location
      */
-    public function redirect(string $location)
+    public function redirect(string $location): void
     {
         header('Location: ' . $location, true, 302);
     }
@@ -61,7 +62,7 @@ class Responses
     /**
      *
      */
-    public function error404()
+    public function error404(): void
     {
         header("HTTP/1.1 404 Not Found");
     }
@@ -69,7 +70,7 @@ class Responses
     /**
      *
      */
-    public function error405()
+    public function error405(): void
     {
         header("HTTP/1.1 405 Method Not Allowed");
     }
@@ -77,7 +78,7 @@ class Responses
     /**
      * send a 503 error to the client
      */
-    public function error503()
+    public function error503(): void
     {
         $this->header('HTTP/1.1 503 Service Unavailable');
         $this->header('Status', '503 Service Unavailable');

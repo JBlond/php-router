@@ -18,7 +18,7 @@ class Registry
      * @param mixed $key
      * @param mixed $value
      */
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $this->registry["$key"] = $value;
     }
