@@ -1,32 +1,34 @@
 {
-    "name": "jblond/php-router",
-    "description": "A simple php router class",
-    "type": "library",
-    "license": "MIT",
-    "keywords": [
-        "php",
-        "router"
-    ],
-    "authors": [
-        {
-            "name": "JBlond",
-            "email": "leet31337@web.de"
-        }
-    ],
-    "require": {
-        "php" : ">= 7.1"
-    },
-    "require-dev": {
-       "phan/phan": "3.0.5",
-        "squizlabs/php_codesniffer": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "jblond\\": "src/classes/jblond"
-        }
-    },
-    "scripts": {
-      "php_src": "phpcs --standard=phpcs.xml --ignore=*vendor/* -s -p --colors ./",
-      "phan": "phan"
+  "name": "jblond/php-router",
+  "description": "A simple php router class",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "router"
+  ],
+  "authors": [
+    {
+      "name": "JBlond",
+      "email": "leet31337@web.de"
     }
+  ],
+  "require": {
+    "php": ">= 7.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*"
+  },
+  "suggest": {
+    "phan/phan": "3.0.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "jblond\\": "src/classes/jblond"
+    }
+  },
+  "scripts": {
+    "php_src": "phpcs --standard=phpcs.xml --ignore=*vendor/* -s -p --colors ./",
+    "phan": "phan"
+  }
 }
