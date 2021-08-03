@@ -58,6 +58,7 @@ $router->add('/post/', function () {
 $router->post('/post/reciver/', function () {
     print_r($_POST);
 });
+$router->run();
 ```
 
 ### dynamic routes
@@ -138,4 +139,10 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
+```
+
+with apache 2.4 you can use
+
+```
+FallbackResource /index.php
 ```
