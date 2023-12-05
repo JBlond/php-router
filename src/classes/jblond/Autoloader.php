@@ -8,19 +8,18 @@ namespace jblond;
  */
 class Autoloader
 {
-
     /**
      * autoloader constructor.
      */
     public function __construct()
     {
-        spl_autoload_register(array($this, '__autoload'));
+        spl_autoload_register(array($this, 'autoload'));
     }
 
     /**
      * @param string $class
      */
-    private function __autoload(string $class)
+    private function autoload(string $class): void
     {
         $class = str_replace('\\', '/', $class); // revert path for old PHP on Linux
         if (file_exists('classes/' . $class . '.php')) {

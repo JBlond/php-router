@@ -8,29 +8,28 @@ namespace jblond\router;
  */
 class Registry
 {
-
     /**
      * @var array
      */
-    private $registry = array();
+    private array $registry = array();
 
     /**
      * @param mixed $key
      * @param mixed $value
      */
-    public function set($key, $value): void
+    public function set(mixed $key, mixed $value): void
     {
-        $this->registry["$key"] = $value;
+        $this->registry[(string) $key] = $value;
     }
 
     /**
      * @param mixed $key
      * @return bool|mixed
      */
-    public function get($key)
+    public function get(mixed $key): mixed
     {
         if (array_key_exists($key, $this->registry)) {
-            return $this->registry["$key"];
+            return $this->registry[(string) $key];
         }
         return false;
     }

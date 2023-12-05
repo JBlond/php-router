@@ -8,13 +8,12 @@ namespace jblond\router;
  */
 class Responses
 {
-
     /**
      * @param string $file file with path
      * @param string $name name for the client
-     * @return void|int
+     * @return void
      */
-    public function download(string $file, string $name)
+    public function download(string $file, string $name): void
     {
         $this->headers(
             array(
@@ -37,7 +36,7 @@ class Responses
             header("$type: $value");
             return true;
         }
-        header("$type");
+        header((string) $type);
         return true;
     }
 

@@ -8,36 +8,35 @@ namespace jblond\router;
  */
 class Router
 {
-
     /**
      * array of routes
      * @var array
      */
-    public $routes = array();
+    public array $routes = array();
 
     /**
      * array of 404's
      * @var array
      */
-    public $routes404 = array();
+    public array $routes404 = array();
 
     /**
      * route is found
      * @var boolean
      */
-    private $route_found;
+    private bool $route_found;
 
     /**
      * path
      * @var string
      */
-    public $path;
+    public string $path;
 
     /**
      * registry object
      * @var Registry
      */
-    public $registry;
+    public Registry $registry;
 
     /**
      * router constructor.
@@ -73,15 +72,15 @@ class Router
      * add route
      * @param string $expression
      * @param mixed $function
-     * @param string|array $method default is GET
+     * @param array|string $method default is GET
      */
-    public function add(string $expression, $function, $method = array('GET')): void
+    public function add(string $expression, mixed $function, array|string $method = array('GET')): void
     {
-        array_push($this->routes, array(
+        $this->routes[] = array(
             'expression' => $expression,
             'function' => $function,
             'method' => $method
-        ));
+        );
     }
 
     /**
@@ -89,7 +88,7 @@ class Router
      * @param string $expression
      * @param mixed $function
      */
-    public function get(string $expression, $function): void
+    public function get(string $expression, mixed $function): void
     {
         $this->add($expression, $function, 'GET');
     }
@@ -99,7 +98,7 @@ class Router
      * @param string $expression
      * @param mixed $function
      */
-    public function post(string $expression, $function): void
+    public function post(string $expression, mixed $function): void
     {
         $this->add($expression, $function, 'POST');
     }
@@ -108,9 +107,9 @@ class Router
      * add 404
      * @param mixed $function
      */
-    public function add404($function): void
+    public function add404(mixed $function): void
     {
-        array_push($this->routes404, $function);
+        $this->routes404[] = $function;
     }
 
     /**
@@ -121,7 +120,7 @@ class Router
     private function isMethodNotInRoutes(array $route): bool
     {
         if (is_array($route['method'])) {
-            if (! in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), (array) $route['method'])) {
+            if (!in_array(filter_input(INPUT_SERVER, 'REQUEST_METHOD'), $route['method'], true)) {
                 return true;
             }
         } elseif (filter_input(INPUT_SERVER, 'REQUEST_METHOD') !== $route['method']) {
@@ -137,18 +136,18 @@ class Router
     {
         if (!$this->route_found) {
             foreach ($this->routes404 as $route404) {
-                call_user_func_array($route404, array($this->path));
+                $route404($this->path);
             }
         }
     }
 
     /**
      * @param string $expression
-     * @return mixed
+     * @return string|array
      */
-    private function replaceLambdaPatterns(string $expression)
+    private function replaceLambdaPatterns(string $expression): string|array
     {
-        if (strpos($expression, ':') !== false) {
+        if (str_contains($expression, ':')) {
             return str_replace(
                 array(':any', ':num', ':all', ':an', ':url', ':hex'),
                 array('[^/]+', '[0-9]+', '.*', '[0-9A-Za-z]+', '[0-9A-Za-z-_]+', '[0-9A-Fa-f]+'),
@@ -160,9 +159,9 @@ class Router
 
     /**
      * @param array $route
-     * @return mixed
+     * @return array
      */
-    private function prepareRoute(array $route)
+    private function prepareRoute(array $route): array
     {
         if ($this->registry->get('basepath')) {
             $route['expression'] = '(' . $this->registry->get('basepath') . ')/' . $route['expression'];
@@ -175,7 +174,7 @@ class Router
         $route['expression'] = '^' . $route['expression'];
 
         //Add 'find string end' automatically
-        $route['expression'] = $route['expression'] . '$';
+        $route['expression'] .= '$';
 
         return $route;
     }
